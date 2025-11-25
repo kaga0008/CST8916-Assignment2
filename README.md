@@ -2,7 +2,7 @@
 ## Elizabeth Kaganovsky (040956895)
 
 ### 1. Executive Summary 
-The following document will provide a high-level comparison of roughly equivalent services in Microsoft Azure, Amazon Web Services and Google Cloud Platform
+The following document will provide a high-level comparison of roughly equivalent services in Microsoft Azure, Amazon Web Services and Google Cloud Platform in the areas of RESTful APIs, GraphQL services, WebSocket services, data streaming services, and stream analytics services. Each CSP offers competitive options which often are very close to functionality with one another, leading for ecosystem integration to become one of the main guiding tenets for organizations seeking to reap the benefits of the cloud. A key finding from this assingment is that each CSP offers such a wealth of options that often times multiple similar services can be used to achieve more or less the same result.
 
 ### 2. Introduction
 Cloud computing is most often provided by one of three cloud service providers (CSPs). Amazon Web Services, launched in 2006, remains the market leader with a massive variety of services for countless industries. Since 2010 Microsoft has offered Azure, which brings with it a unique integration with Microsoft products and sovereignty options for governments. Google Cloud Platform caught up in 2011, offering customers a variety of tools for data analytics and machine learning, with robust support for containerized workloads. There is a myriad of additional cloud providers (IBM, Oracle, and Tencent among them), but to limit the scope of this document, only the three largest CSPs will be studied. The purpose of this comparison is to gain a deeper understanding of the services offered by the three major CSPs--while the services are considered rough equivalents, there are intricacies in each offering that can completely derail development if unaccounted for in the development process.
@@ -39,51 +39,54 @@ GraphQL services are available on GCP primarily through Apigee, which provides a
 
 ### 3.3. WebSocket Services
 #### 3.3.1. Microsoft Azure
-Azure Web PubSub is Azure's offering for building real-time WebSocket applications 
+Azure Web PubSub is Azure's offering for building real-time WebSocket applications [12]. Web PubSub's performance is grouped into billable, scalable units, each of which can support 1,000 simultaneous connections and 3,000 outbound messages per second [13].
 
 
 #### 3.3.2. Amazon Web Services
-AWS API Gateway provides a WebSocket API that can interact with other AWS offerings like Lambda functions or Kinesis for backend functionality [12]. API Gateway can scale effectively to support millions of concurrent connections around the world. However, it unfortunately lacks fallback transport, meaning that in settings or on devices where websockets may be unavailable (corporate networks with proxy servers, older browsers, etc), there is no provided automatic fallback, meaning that the difficult undertaking of implementing fallback transport falls upon the developer [13].
+AWS API Gateway provides a WebSocket API that can interact with other AWS offerings like Lambda functions or Kinesis for backend functionality [14]. API Gateway can scale effectively to support millions of concurrent connections around the world. However, it unfortunately lacks fallback transport, meaning that in settings or on devices where websockets may be unavailable (corporate networks with proxy servers, older browsers, etc), there is no provided automatic fallback, meaning that the difficult undertaking of implementing fallback transport falls upon the developer [15].
 
 
 #### 3.3.3. Google Cloud Platform
-WebSockets can be implemented on the managed Cloud Run service of GCP. Like the other options, Cloud Run WebSockets scale with traffic [14].
+WebSockets can be implemented on the managed Cloud Run service of GCP. Like the other options, Cloud Run WebSockets scale with traffic [16].
 
 ### 3.4. Data Streaming Services
 #### 3.4.1. Microsoft Azure
-Azure provides Event Hubs and IoT Hub (A wrapper service for Event Hubs) for data streaming.Data can be ingested for a variety of sources, including IoT devices, logs, and social media, and funneled into storage such as Blob Storage or analysis tools such as Stream Analytics. Microsoft states that Event Hubs can ingest millions of events per second and support hundreds of thousands of simultaneous sources while maintaining low latency [15].
+Azure provides Event Hubs and IoT Hub (A wrapper service for Event Hubs) for data streaming.Data can be ingested for a variety of sources, including IoT devices, logs, and social media, and funneled into storage such as Blob Storage or analysis tools such as Stream Analytics. Microsoft states that Event Hubs can ingest millions of events per second and support hundreds of thousands of simultaneous sources while maintaining low latency [17].
+
 
 #### 3.4.2. Amazon Web Services
-Kinesis Data Streams, Kinesis Data Firehose
+Amazon Kinesis is AWS's all-around solution to a variety of data streaming needs. Kinesis Data Streams and Video Streams are serverless data ingestion solutions, Data Firehose is used for loading data into storages such as data lakes or analytics services, and Data Analytics can process streams in real time with SQL or Apache Flink, making for a comprehensive suite of tools for data streaming and processing [18].
+
 
 #### 3.4.3. Google Cloud Platform
-Dataflow, Pub/Sub
+GCP's Pub/Sub service allows for the gathering of real-time event data from multiple sources that utilizes (as the name implies) a publish/subscribe model of communication allowing for asynchronous, decoupled applications [19]. Pub/Sub provides native integration with Dataflow, another GCP service for processing of event streams [20].
+
 
 ### 3.5. Stream Analytics
 #### 3.5.1. Microsoft Azure
-Azure Provides Stream Analytics to process streaming data with sub-millisecond latency [16].
+Azure Provides the aptly named Stream Analytics for stream analytics, a managed service which integrates with Azure's other offerings such as those in AI and ML to process streaming data. Unlike the options from AWS and GCP, Stream Analytics uses its own unique query language, Stream Analytics Query Language (SAQL), to process streaming data in both structured and unstructured formats with sub-millisecond latency [21].
+
 
 #### 3.5.2. Amazon Web Services
-Kinesis, AWS Glue?
+Stream analytics fall under the functionality of AWS' Kinesis platform, which also features tools for data streaming. In addition to more traditional methods of stream analytics, clients can also install Kinesis Agents into their servers for collecting, monitoring and analyzing log data at the source [22].
+
 
 #### 3.5.3. Google Cloud Platform
-BigQuery, Dataproc
+GCP's main offering for stream analytics is Dataflow 
 
 
 ### 4. Use Case Analysis
 ### 4.1. Use Case 1: Credit Card Fraud Detection
 Fraud is best detected right when it happens to minimize the impact it has on organizations and individuals who may be victimized. As such, real-time analytics must be used to detect these issues as soon as they occur. AWS once provided the managed service Amazon Fraud Detector but has since stopped allowing new clients for the service, but otherwise has expansive service offerings which can be combined by clients into robust detection solutions, however this may be expensive. GCP may be preferrable for newer companies who lack access to Amazon Fraud Detector since its closure of new clients since GCP provides advanced analytics and machine learning which can intercept fraud on the fly
 
-sorry not finished :( i am exhausted
 
 
 ### 4.2. Use Case 2: Environmental safety monitoring
-Some environments require constant monitoring and immediate feedback on sudden dangerous changes in condition, such as mines which may experience build ups of gas or experience geologic activity as a prelude to collapses. To detect these before they endanger lives or property, IoT sensors can be used to monitor the environment, and data analytics tools to understand when data indicates a strong chance of impending disaster well in advance. The assumption is made that the enterprise currently uses non-networked detection or some other form of non-IoT safety features, but does use Windows technologies for the organization's computing and logistics needs. In this situation, Microsoft Azure is the preferable choice for building an IoT real-time safety system. Performance, in this situation, is not a significant component of CSP choice since all three options are roughly equivalent in latency. While AWS presents a more expansive set of services, Azure has potential for much stronger integration with the existing ecosystem. GCP offers strong machine learning tools, but is ruled out due to their 2023 retirement of Google Cloud IoT Core, which suggests that their systems cannot be trusted to remain offered for extended durations of time, which is a significant risk in an environment where sensors may be difficult to retrieve and update [16]. Services like Azure IoT Hub can be used for data ingestion, while Azure Stream Analytics provides serverless data processing. Processed data can then be visualized using Power BI for management and safety officials. Azure also offers IoT Edge, a service which allows some computing to be done on containerized workloads at the "edge" of the cloud, functionally on-prem and closer to the sensors, to provide analytics even if internet connection to the cloud is lost [17].
+Some environments require constant monitoring and immediate feedback on sudden dangerous changes in condition, such as mines which may experience build ups of gas or experience geologic activity as a prelude to collapses. To detect these before they endanger lives or property, IoT sensors can be used to monitor the environment, and data analytics tools to understand when data indicates a strong chance of impending disaster well in advance. The assumption is made that the enterprise currently uses non-networked detection or some other form of non-IoT safety features, but does use Windows technologies for the organization's computing and logistics needs. In this situation, Microsoft Azure is the preferable choice for building an IoT real-time safety system. Performance, in this situation, is not a significant component of CSP choice since all three options are roughly equivalent in latency. While AWS presents a more expansive set of services, Azure has potential for much stronger integration with the existing ecosystem. GCP offers strong machine learning tools, but is ruled out due to their 2023 retirement of Google Cloud IoT Core, which suggests that their systems cannot be trusted to remain offered for extended durations of time, which is a significant risk in an environment where sensors may be difficult to retrieve and update [23]. Services like Azure IoT Hub can be used for data ingestion, while Azure Stream Analytics provides serverless data processing. Processed data can then be visualized using Power BI for management and safety officials. Azure also offers IoT Edge, a service which allows some computing to be done on containerized workloads at the "edge" of the cloud, functionally on-prem and closer to the sensors, to provide analytics even if internet connection to the cloud is lost [24].
 
-
-- Consider: cost, performance, ease of integration, ecosystem
 
 ### 5. Conclusion
+Picking a CSP is a difficult choice depending on many criteria, such as team experience, cost requirements, and existing ecosystem. In some cases, such as REST API services, each CSP provides extremely similar services, leaving the decision to be more heavily weighed by developer preference or service cost. In other cases, such as streaming analytics services, the choice may be more guided by specific offerings from each CSP in the realm of ML, or ease of use of the service since some offerings are services that can integrate while others are explicitly all provided by a single platform.
 
 ### 6. References
 [1] Dlepow, “Policies in Azure API management,” Microsoft Learn. https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-policies 
@@ -108,17 +111,31 @@ Some environments require constant monitoring and immediate feedback on sudden d
 
 [11] D. Allen, “Secure GraphQL APIs in minutes with Cloud Run and GRAND Stack,” Medium, Jun. 06, 2019. https://medium.com/google-cloud/secure-graphql-apis-in-minutes-with-google-cloud-run-and-grand-stack-97d050dbc744 
 
-[12] V. Kumar, “Understanding WebSocket API in Amazon API Gateway,” Medium, Aug. 29, 2023. https://kvs-vishnu23.medium.com/understanding-websocket-api-in-amazon-api-gateway-60dc930307c6 
+[12x] Bjqian, “Performance guide for Azure Web PubSub Service,” Microsoft Learn. https://learn.microsoft.com/en-us/azure/azure-web-pubsub/concept-performance 
 
-[13] “Scaling AWS API Gateway: Challenges and considerations,” Ably Realtime. https://ably.com/topic/scaling-aws-api-gateway-websocket-apis 
+[13x]Vicancy, “Billing model of Azure Web PubSub service,” Microsoft Learn. https://learn.microsoft.com/en-us/azure/azure-web-pubsub/concept-billing-model
 
-[14] “Using WebSockets,” Google Cloud Documentation. https://docs.cloud.google.com/run/docs/triggering/websockets 
+[14] V. Kumar, “Understanding WebSocket API in Amazon API Gateway,” Medium, Aug. 29, 2023. https://kvs-vishnu23.medium.com/understanding-websocket-api-in-amazon-api-gateway-60dc930307c6 
 
-[15] AliciaLiMicrosoft, “Introduction to Azure Stream Analytics - Azure Stream Analytics,” Microsoft Learn. https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction 
+[15] “Scaling AWS API Gateway: Challenges and considerations,” Ably Realtime. https://ably.com/topic/scaling-aws-api-gateway-websocket-apis 
 
-[16] “TOP 5 IoT Platforms for 2025” https://www.cloud.studio/top-5-iot-platforms-for-2025/ 
+[16] “Using WebSockets,” Google Cloud Documentation. https://docs.cloud.google.com/run/docs/triggering/websockets 
 
-[17] Sethmanheim, “What is Azure IoT Edge,” Microsoft Learn. https://learn.microsoft.com/en-us/azure/iot-edge/about-iot-edge
+[17] AliciaLiMicrosoft, “Introduction to Azure Stream Analytics - Azure Stream Analytics,” Microsoft Learn. https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction 
+
+[18] R. John, “Azure and Amazon Data Stream Analytics and Processing: Amazon Kinesis, Azure Stream Analytics, and Azure Event Hub,” Medium, Dec. 27, 2020. https://trojrobert.medium.com/azure-and-amazon-data-stream-analytics-and-processing-amazon-kinesis-azure-stream-analytics-and-a6b42b213eb7 
+
+[19] “Realtime Streaming in Google Cloud Platform,” Aug. 15, 2023. https://medium.com/@iampirated/realtime-streaming-in-google-cloud-platform-99163a9719ba 
+
+[20] “Pub/Sub for Application & Data Integration | Google Cloud,” Google Cloud. https://cloud.google.com/pubsub
+
+[21] “amazon kinesis vs microsoft azure stream analytics: Which Tool is Better for Your Next Project?” https://www.projectpro.io/compare/amazon-kinesis-vs-microsoft-azure-stream-analytics
+
+[22] “Working with streaming data on AWS - Build Modern Data Streaming Architectures on AWS.” https://docs.aws.amazon.com/whitepapers/latest/build-modern-data-streaming-analytics-architectures/working-with-streaming-data-on-aws.html
+
+[23] “TOP 5 IoT Platforms for 2025” https://www.cloud.studio/top-5-iot-platforms-for-2025/ 
+
+[24] Sethmanheim, “What is Azure IoT Edge,” Microsoft Learn. https://learn.microsoft.com/en-us/azure/iot-edge/about-iot-edge
 
 
 ### 7. AI Disclosure
