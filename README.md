@@ -54,23 +54,31 @@ WebSockets can be implemented on the managed Cloud Run service of GCP. Like the 
 Azure provides Event Hubs and IoT Hub (A wrapper service for Event Hubs) for data streaming.Data can be ingested for a variety of sources, including IoT devices, logs, and social media, and funneled into storage such as Blob Storage or analysis tools such as Stream Analytics. Microsoft states that Event Hubs can ingest millions of events per second and support hundreds of thousands of simultaneous sources while maintaining low latency [15].
 
 #### 3.4.2. Amazon Web Services
+Kinesis Data Streams, Kinesis Data Firehose
+
 #### 3.4.3. Google Cloud Platform
+Dataflow, Pub/Sub
 
 ### 3.5. Stream Analytics
 #### 3.5.1. Microsoft Azure
 Azure Provides Stream Analytics to process streaming data with sub-millisecond latency [16].
+
 #### 3.5.2. Amazon Web Services
+Kinesis, AWS Glue?
+
 #### 3.5.3. Google Cloud Platform
+BigQuery, Dataproc
+
 
 ### 4. Use Case Analysis
-
 ### 4.1. Use Case 1: Credit Card Fraud Detection
-Fraud is best detected right when it happens to minimize the impact it has on organizations and individuals who may be victimized. As such, real-time analytics must be used to detect these issues as soon as they occur. 
+Fraud is best detected right when it happens to minimize the impact it has on organizations and individuals who may be victimized. As such, real-time analytics must be used to detect these issues as soon as they occur. AWS once provided the managed service Amazon Fraud Detector but has since stopped allowing new clients for the service, but otherwise has expansive service offerings which can be combined by clients into robust detection solutions, however this may be expensive. GCP may be preferrable for newer companies who lack access to Amazon Fraud Detector since its closure of new clients since GCP provides advanced analytics and machine learning which can intercept fraud on the fly
+
+sorry not finished :( i am exhausted
 
 
 ### 4.2. Use Case 2: Environmental safety monitoring
 Some environments require constant monitoring and immediate feedback on sudden dangerous changes in condition, such as mines which may experience build ups of gas or experience geologic activity as a prelude to collapses. To detect these before they endanger lives or property, IoT sensors can be used to monitor the environment, and data analytics tools to understand when data indicates a strong chance of impending disaster well in advance. The assumption is made that the enterprise currently uses non-networked detection or some other form of non-IoT safety features, but does use Windows technologies for the organization's computing and logistics needs. In this situation, Microsoft Azure is the preferable choice for building an IoT real-time safety system. Performance, in this situation, is not a significant component of CSP choice since all three options are roughly equivalent in latency. While AWS presents a more expansive set of services, Azure has potential for much stronger integration with the existing ecosystem. GCP offers strong machine learning tools, but is ruled out due to their 2023 retirement of Google Cloud IoT Core, which suggests that their systems cannot be trusted to remain offered for extended durations of time, which is a significant risk in an environment where sensors may be difficult to retrieve and update [16]. Services like Azure IoT Hub can be used for data ingestion, while Azure Stream Analytics provides serverless data processing. Processed data can then be visualized using Power BI for management and safety officials. Azure also offers IoT Edge, a service which allows some computing to be done on containerized workloads at the "edge" of the cloud, functionally on-prem and closer to the sensors, to provide analytics even if internet connection to the cloud is lost [17].
-
 
 
 - Consider: cost, performance, ease of integration, ecosystem
@@ -114,5 +122,7 @@ Some environments require constant monitoring and immediate feedback on sudden d
 
 
 ### 7. AI Disclosure
-AI was used in the initial data gathering stage of this project
+- **Tool:** Google AI Overview
+- **Purpose:** Source gathering and research guidance
+- **Extent:** Used to get suggestions on services from each of the CSPs and sources to read more on them.
 
