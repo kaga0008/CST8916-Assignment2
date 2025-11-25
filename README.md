@@ -32,16 +32,32 @@ For an enterprise-grade alternative, GCP provides Apigee API Management, a fully
 
 ### 3.2. GraphQL Services
 #### 3.2.1. Microsoft Azure
-GraphQL is supported by a multitude of Azure services, the choice of which to use depends on the needs of the application. For existing GraphQL apps, Azure App Services or Azure Container Apps allow for easy deployment with no/minimal changes to code. For apps that exist but do not have GraphQL functionality yet, Data API Builder can create GraphQL endpoints with little coding to add support. When building a GraphQL API layer from scratch to serve existing APIs, Azure API Management with GraphQL transformation can be used. APIM 
+GraphQL is supported by a multitude of Azure services, the choice of which to use depends on the needs of the application. For existing GraphQL apps, Azure App Services or Azure Container Apps allow for easy deployment with no/minimal changes to code. For apps that exist but do not have GraphQL functionality yet, Data API Builder can create GraphQL endpoints with little coding to add support. When building a GraphQL API layer from scratch to serve existing APIs, Azure API Management with GraphQL transformation can be used.  
 
 - https://learn.microsoft.com/en-us/azure/developer/javascript/graphql-developer-guide 
 
 #### 3.2.2. Amazon Web Services
-AWS AppSync is a managed serverless service that provides GraphQL support to the AWS ecosystem. Unlike 
+AWS AppSync is a managed serverless service that provides GraphQL support to the AWS ecosystem. AppSync seamlessly integrates with and provides querying of other AWS services such as DynamoDB, Elasticsearch Service, Lambda functions, Aurora, and relational databases.
+- https://aws.amazon.com/appsync/ 
 
 #### 3.2.3. Google Cloud Platform
+GraphQL services are available on GCP primarily through Apigee, which provides an API management layer for REST as well. However, GraphQL  can be deployed and managed using various GCP services, including running an Apollo server in containers on Cloud Run.
+- https://medium.com/google-cloud/secure-graphql-apis-in-minutes-with-google-cloud-run-and-grand-stack-97d050dbc744
+- https://dev.to/aws-builders/introduction-to-aws-appsync-fully-managed-graphql-service-4mff 
 
 ### 3.3. WebSocket Services
+
+#### 3.3.1. Microsoft Azure
+Azure Web PubSub is Azure's offering for building real-time WebSocket applications 
+
+#### 3.3.2. Amazon Web Services
+AWS API Gateway provides a WebSocket API that can interact with other AWS offerings like Lambda functions or Kinesis for backend functionality. API Gateway can scale effectively to support millions of concurrent connections around the world. However, it unfortunately lacks fallback transport, meaning that in settings or on devices where websockets may be unavailable (corporate networks with proxy servers, older browsers, etc), there is no provided automatic fallback, meaning that the difficult undertaking of implementing fallback transport falls upon the developer.
+- https://kvs-vishnu23.medium.com/understanding-websocket-api-in-amazon-api-gateway-60dc930307c6 
+- https://ably.com/topic/scaling-aws-api-gateway-websocket-apis
+
+#### 3.3.3. Google Cloud Platform
+WebSockets can be implemented on the managed Cloud Run service of GCP. Like the other options, Cloud Run WebSockets scale with traffic.
+- https://docs.cloud.google.com/run/docs/triggering/websockets
 
 ### 3.4. Data Streaming Services
 
@@ -50,9 +66,17 @@ AWS AppSync is a managed serverless service that provides GraphQL support to the
 ### 4. Use Case Analysis
 
 ### 4.1. Use Case 1: Credit Card Fraud Detection
-Fraud is best detected right when it happens to minimize the impact it has on organizations and individuals who may be victimized
+Fraud is best detected right when it happens to minimize the impact it has on organizations and individuals who may be victimized. As such, real-time analytics must be used to detect these issues as soon as they occur. 
 
-### 4.2. Use Case 2: Multiplayer gaming
+- Consider: cost, performance, ease of integration, ecosystem
+
+### 4.2. Use Case 2: Environmental safety monitoring
+Some environments require constant monitoring and immediate feedback on sudden dangerous changes in condition, such as mines which may experience build ups of gas or experience geologic activity as a prelude to collapses. To detect these before they endanger lives or property, IoT sensors can be used to monitor the environment, and data analytics tools to understand when data indicates a strong chance of impending disaster well in advance. The assumption is made that the enterprise currently uses non-networked detection or some other form of non-IoT safety features, but does use Windows technologies for the organization's computing and logistics needs. In this situation, Microsoft Azure is the preferable choice for building an IoT real-time safety system. Performance, in this situation, is not a significant component of CSP choice since all three options are roughly equivalent in latency. While AWS presents a more expansive set of services, Azure has potential for much stronger integration with the existing ecosystem. GCP offers strong machine learning tools, but is ruled out due to their 2023 retirement of Google Cloud IoT Core, which suggests that their systems cannot be trusted to remain offered for extended durations of time, which is a significant risk in an environment where sensors may be difficult to retrieve and update. Services like Azure IoT Hub can be used for data ingestion, while Azure Stream Analytics provides serverless data processing. Processed data can then be visualized using Power BI for management and safety officials.
+
+- https://www.cloud.studio/top-5-iot-platforms-for-2025
+
+
+- Consider: cost, performance, ease of integration, ecosystem
 
 ### 5. Conclusion
 
